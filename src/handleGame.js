@@ -15,12 +15,12 @@ export function round() {
             const board = document.getElementById('board')
             board.onclick = boardClicked;
 
-            const ee = setTimeout(understate, 2000);
+            const understateTimeout = setTimeout(understate, 2000);
             function understate() {
                 fields[drawn].classList.remove('active')
                 if (clicked === false) {
                     loseLife();
-                    clearTimeout(ee)
+                    clearTimeout(understateTimeout)
                     clearInterval(highlightInterval)
                     round();
                 }
