@@ -1,22 +1,26 @@
 import * as handle from './handleGame';
 import { state } from './index';
+import { Field } from './field'
 
-export function clearTable() {
-    const gameBoard = document.getElementById('board');
-    if (gameBoard != undefined) {
-        for (var i = 1; i < 444; i++)
-            window.clearInterval(i);
-        gameBoard.remove();
-    }
-};
-
-export function generateBoard() {
+export default function generateBoard() {
+    clearTable();
     createStatePanel();
     createFields(selectSize());
 };
 
+function clearTable() {
+    const gameBoard = document.getElementById('board');
+    if (gameBoard) {
+        const maxNumberOfIntervals = 9999;
+        for (var i = 1; i < maxNumberOfIntervals; i++) {
+            window.clearInterval(i);
+        }
+        gameBoard.remove();
+    }
+};
+
 function createStatePanel() {
-    const board = document.createElement('div')
+    const board = document.createElement('div');
     board.id = 'board';
 
     const boardPlace = document.getElementsByClassName('boardPlace')[0]
@@ -56,6 +60,7 @@ function selectSize() {
     const selectSize = document.getElementById('sizeSelector');
     const value = selectSize[selectSize.selectedIndex].value;
     const size = parseInt(value);
+    state.size = size;
     return size;
 };
 
@@ -63,17 +68,16 @@ function createFields(size) {
     const fields = document.createElement('div');
     fields.id = 'fields';
     board.appendChild(fields);
-    const numberOfFields = size * size;
+    let fieldCounter = 0;
 
-    for (let i = 0; i < numberOfFields; i++) {
-        const field = document.createElement('div');
-        field.className = 'field';
-        fields.appendChild(field);
-        const nextLine = i % size;
-        if (nextLine + 1 === size) {
-            const newLine = document.createElement('div');
-            newLine.className = 'newLine';
-            fields.appendChild(newLine);
-        }
-    }
+    for (let r = 0; r < size; r++) {
+        const row = document.createElement('div');
+        fields.appendChild(row);
+        row.id = 'row' + r;
+        for (let i = 0; i < size; i++) {
+            const field = new Field(fieldCounter, r);
+            field.create;
+            fieldCounter += 1;
+        };
+    };
 };

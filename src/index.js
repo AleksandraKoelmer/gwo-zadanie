@@ -1,25 +1,21 @@
-import * as generate from './generateGameBoard'
+import generateBoard from './generateGameBoard'
 import * as handle from './handleGame'
 
-const start = document.getElementById('startGame');
-start.onclick = newGame;
+const startButton = document.getElementById('startGame');
+startButton.onclick = newGame;
 
-const reset = document.getElementById('resetGame');
-reset.onclick = newGame;
+const resetButton = document.getElementById('resetGame');
+resetButton.onclick = newGame;
 
-export var state = {
-    time: 0,
-    score: 0,
-    lives: 0
-};
+export var state = {};
 
 function newGame() {
-    generate.clearTable();
     state = {
         time: 60,
         score: 0,
-        lives: 5
+        lives: 5,
+        fields: []
     };
-    generate.generateBoard()
+    generateBoard()
     handle.round();
 };

@@ -1,58 +1,33 @@
 import { state } from './index'
 
 export function round() {
-    const fields = document.getElementsByClassName('field')
     const min = Math.ceil(0);
-    const max = Math.floor(fields.length);
-    const highlightInterval = setInterval(highlight, 3000);
+    const max = Math.floor(state.size * state.size);
 
+    setInterval(highlight, 3000);
     function highlight() {
         if (state.time > 0 && state.lives > 0) {
-            const drawn = Math.floor(Math.random() * (max - min)) + min;
-            fields[drawn].classList.add('active')
-
-            var clicked = false;
-            const board = document.getElementById('board')
-            board.onclick = boardClicked;
-
-            const understateTimeout = setTimeout(understate, 2000);
-            function understate() {
-                fields[drawn].classList.remove('active')
-                if (clicked === false) {
-                    loseLife();
-                    clearTimeout(understateTimeout)
-                    clearInterval(highlightInterval)
-                    round();
-                }
-
-            };
-
-            function boardClicked(e) {
-                clicked = true;
-                userClick(e);
-            };
-        }
-        else {
-            clearInterval(highlightInterval)
-        }
-       
+            const drawnField = Math.floor(Math.random() * (max - min)) + min;
+            const drawnedField = state.fields[drawnField];
+            drawnedField.highlightAndUnderstate;
+        };
     };
 };
 
 export function userClick(e) {
     if (e.target.classList.contains('active')) {
+        let field = document.getElementsByClassName('active');
+        field[0].classList.remove('active');
         state.score += 1;
-        var field = document.getElementsByClassName('active')
-        field[0].classList.remove('active')
-        updateScore(state.score)
+        updateScore(state.score);
     }
     else {
-        loseLife()
+        loseLife();
     }
 };
 
 export function timeCounter() {
-    const timer = document.getElementById('timer')
+    const timer = document.getElementById('timer');
     const secondsCounter = setInterval(countdown, 1000);
     function countdown() {
         if (state.time > 0) {
