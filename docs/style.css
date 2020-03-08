@@ -1,0 +1,65 @@
+h2 {
+  background-color: aliceblue;
+  margin: 0 auto;
+  padding: 10px;
+  text-align: center;
+  width: 60%;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 30px auto;
+  width: 30%;
+}
+
+.field {
+  background-color: #007bff;
+  border-radius: 5px;
+  display: inline-block;
+  height: 30px;
+  margin: 5px 7px;
+  width: 30px;
+}
+
+.active {
+    background-color: #7fff00;
+  }
+
+#timer,
+#scoreResult,
+#livesResult {
+  display: inline;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 10px;
+  margin: 10px;
+  font-weight: 600;
+}
+
+#board {
+  background-color: aliceblue;
+  margin: 10px;
+  padding: 10px;
+  width: 60%;
+  margin: auto;
+}
+
+#controls {
+  display: flex;
+}
+
+#fields {
+  background-color: cornsilk;
+  margin: 15px auto;
+  padding: 20px;
+  text-align: center;
+  width: 40%;
+}
+
+#scoreResult {
+  margin-right: 50%;
+}
+
+#newLine {
+  display: block;
+}
